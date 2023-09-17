@@ -23,7 +23,7 @@ const CustomButton = ({type, title, customStyles, handleClick}) => {
 
   return (
     <button
-    className={`px-2 py-1.5 rounded-md ${customStyles}`}
+    className={`px-2 py-1.5 rounded-md ${customStyles} hover:scale-110 transform transition-transform duration-300`}
     style={generateStyle(type)}
     onClick={handleClick}
     >{title}</button>

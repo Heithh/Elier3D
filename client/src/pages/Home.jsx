@@ -35,21 +35,21 @@ const Home = () => {
             <motion.div {...headContainerAnimation}
               className='flex flex-col gap-5' >
               <p className='max-w-md font-normal text-gray-600 text-base'>
-                Welcome to Élier 3D! Elevate your style with our <strong>revolutionary 3D
+                Welcome to <strong>ÉLIER 3D!</strong> Elevate your style with our <strong>revolutionary 3D
                   customization tool</strong>. <br/>
-                Createand design fashion that truly stands out.</p>
+                Create and design fashion that truly stands out.</p>
             </motion.div>
 
             <motion.div>
             <CustomButton
               type='filled'
-              title='Sneakers'
-              customStyles='w-fit px-4 py-2.5 font-bold text-sm'
+              title='SNEAKERS'
+              customStyles='w-fit px-4 py-2.5 font-bold text-sm mr-5'
               handleClick={()=> state.product=false}
             />
              <CustomButton
               type='filled'
-              title='T-shirt'
+              title='T-SHIRT'
               customStyles='w-fit px-4 py-2.5 font-bold text-sm'
               handleClick={()=> state.product=true}
             />
@@ -59,7 +59,7 @@ const Home = () => {
 
             <CustomButton
               type='filled'
-              title='Customize it'
+              title='CUSTOMIZE IT'
               customStyles='w-fit px-4 py-2.5 font-bold text-sm'
               handleClick={()=> state.intro=false}
             />
