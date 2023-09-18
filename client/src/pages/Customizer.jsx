@@ -10,15 +10,11 @@ import { EditorTabs, FilterTabs, DecalTypes } from '../config/constants';
 import { fadeAnimation, slideAnimation } from '../config/motion';
 import { AIPicker, ColorPicker, CustomButton, FilePicker, Tab, AddToCart } from '../components';
 import { IoBagCheckOutline } from 'react-icons/io5';
-import { AiOutlineHome } from 'react-icons/Ai';
+import { AiOutlineHome, AiOutlineArrowLeft } from 'react-icons/Ai';
 
 
 
 function Customizer() {
-
-  console.log(state.checkout)
-
-
 
   const [file, setFile] = useState('');
   const snap = useSnapshot(state);
@@ -186,7 +182,7 @@ function Customizer() {
          {...fadeAnimation}>
           <CustomButton
           type='filled'
-          title={<AiOutlineHome size={25} />}
+          title={<AiOutlineArrowLeft size={25} />}
           handleClick={()=> state.intro = true}
           customStyles='w-fit px-4 py-2.5 font-bold text-sm'/>
   <CustomButton

@@ -1,7 +1,7 @@
 import state from '../store';
 import CustomButton from './CustomButton';
 
-function AddToCart({ handleTabClick}) {
+function AddToCart({ handleTabClick, style}) {
 
 
   const handleAdd = () => {
@@ -17,17 +17,18 @@ function AddToCart({ handleTabClick}) {
     } else {
       state.checkout.push(newItem);
     }
+
     handleTabClick('add');
   };
 
   return (
     <div className="filepicker-container">
-      <div>Would you like to add the item to the cart?</div>
+      <div className='mb-10'>Would you like to add the item to the cart?</div>
       <CustomButton
-  type="outline"
+  type="filled"
   title="ADD TO CART"
   handleClick={handleAdd}
-  customStyles="text-xs"
+  customStyles="text-xs "
       />
     </div>
   );
