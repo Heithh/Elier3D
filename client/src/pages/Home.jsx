@@ -12,7 +12,7 @@ import {
 
 const Home = () => {
   const snap = useSnapshot(state);
-  console.log(state.product)
+
   return (
     <AnimatePresence>
       {snap.intro && (
@@ -45,13 +45,20 @@ const Home = () => {
               type='filled'
               title='SNEAKERS'
               customStyles='w-fit px-4 py-2.5 font-bold text-sm mr-5'
-              handleClick={()=> state.product=false}
+              handleClick={()=>  {
+                state.product=false;
+                state.productId = 2;
+
+              }}
             />
              <CustomButton
               type='filled'
               title='T-SHIRT'
               customStyles='w-fit px-4 py-2.5 font-bold text-sm'
-              handleClick={()=> state.product=true}
+              handleClick={() => {
+                state.product = true;
+                state.productId = 1;
+              }}
             />
 
 
@@ -61,7 +68,7 @@ const Home = () => {
               type='filled'
               title='CUSTOMIZE IT'
               customStyles='w-fit px-4 py-2.5 font-bold text-sm'
-              handleClick={()=> state.intro=false}
+              handleClick={()=>  state.intro=false}
             />
 
 

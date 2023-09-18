@@ -9,9 +9,15 @@ import { downloadCanvasToImage, reader } from '../config/helpers';
 import { EditorTabs, FilterTabs, DecalTypes } from '../config/constants';
 import { fadeAnimation, slideAnimation } from '../config/motion';
 import { AIPicker, ColorPicker, CustomButton, FilePicker, Tab, AddToCart } from '../components';
+import { IoBagCheckOutline } from 'react-icons/io5';
+import { AiOutlineHome } from 'react-icons/Ai';
+
 
 
 function Customizer() {
+
+  console.log(state.checkout)
+
 
 
   const [file, setFile] = useState('');
@@ -19,7 +25,7 @@ function Customizer() {
 
   const [prompt, setPrompt] = useState('');
   const [generatingImg, setGeneratingImg] = useState(false);
-  const [showAddToCart, setShowAddToCart] = useState(false);
+
 
 
   const [activeEditorTab, setActiveEditorTab] = useState("");
@@ -28,20 +34,7 @@ function Customizer() {
     stylishShirt: false,
   });
 
-  useEffect(() => {
-    let timer;
-    if (activeEditorTab === "add") {
-      setShowAddToCart(true);
-      timer = setTimeout(() => {
-        setShowAddToCart(false);
-        setActiveEditorTab("");
-      }, 2000);
-    }
 
-    return () => {
-      clearTimeout(timer); // Clean up the timer
-    };
-  }, [activeEditorTab]);
 
   // show tab content depending on the activeTab
   const generateTabContent = () => {
@@ -62,7 +55,7 @@ function Customizer() {
         handleSubmit={handleSubmit}
         />
         case "add":
-          return showAddToCart ? <AddToCart /> : null;
+          return <AddToCart handleTabClick={ handleTabClick} />
       default:
         return null;
     }
@@ -147,25 +140,20 @@ function Customizer() {
   };
 
   const handleCheckout = () => {
-
-    axios.post("http://localhost:8080/create-checkout-session", {
-    items: [
-      { id: 1, quantity: 3 },
-      { id: 2, quantity: 1 },
-    ]
-  })
-  .then(response => {
-    if (response.status === 200) {
-      window.location = response.data.url;
-    } else {
-      console.error(response.data);
-    }
-  })
-  .catch(error => {
-    console.error(error);
-  });
-
+    axios
+      .post("http://localhost:8080/create-checkout-session", {items: state.checkout} )
+      .then((response) => {
+        if (response.status === 200) {
+          window.location = response.data.url;
+        } else {
+          console.error(response.data);
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
+
 
   return (
     <AnimatePresence>
@@ -198,12 +186,12 @@ function Customizer() {
          {...fadeAnimation}>
           <CustomButton
           type='filled'
-          title='Home'
+          title={<AiOutlineHome size={25} />}
           handleClick={()=> state.intro = true}
           customStyles='w-fit px-4 py-2.5 font-bold text-sm'/>
   <CustomButton
           type='filled'
-          title={<img src="/checkout.png" alt="Checkout" className="h-5 w-5" />}
+          title={<IoBagCheckOutline size={25}/>}
           handleClick={() => handleCheckout()}
           customStyles='w-fit px-4 py-2.5 font-bold text-sm'/>
         </motion.div>
