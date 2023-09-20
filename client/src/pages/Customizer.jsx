@@ -124,9 +124,9 @@ function Customizer() {
       })
 
       const data = await response.json();
-
-
+      //console.log('Image URL:', data.photo)
       handleDecals(type, `data:image/png;base64,${data.photo}`)
+
     } catch (error) {
       alert(error)
     } finally {

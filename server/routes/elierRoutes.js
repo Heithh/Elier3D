@@ -1,16 +1,14 @@
 const express = require('express');
 const dotenv = require('dotenv');
-const OpenAI = require('openai');
+const fetch = require('node-fetch');
+const cors = require('cors');
 
 dotenv.config();
 
 const router = express.Router();
 
-const openai = new OpenAI({
-  organization: process.env.ORG_ID,
-  apiKey: process.env.OPENAI_API_KEY
-});
-
+const apiKey = process.env.OPENAI_API_KEY;
+router.use(cors());
 router.get('/', (req, res) => {
   res.status(200).json({ message: "Hello from Elier ROUTES" });
 });
@@ -19,19 +17,38 @@ router.route('/').post(async (req, res) => {
   try {
     const { prompt } = req.body;
 
-    const response = await openai.createImage({
-      prompt: prompt,
-      n: 1,
-      size: "1024x1024",
-      response_format: 'b64_json'
-    });
+    const response = await fetch(
+      "https://api.openai.com/v1/images/generations",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${apiKey}`,
+          "User-Agent": "Chrome",
+        },
+        body: JSON.stringify(
+          {
+            prompt,
+            n: 1,
+            size: "1024x1024",
+          }
+        ),
+      }
+    );
 
-    const image = response.data[0].b64_json;
+    const data = await response.json();
+    const imageUrl = data.data[0].url; 
 
-    res.status(200).json({ photo: image });
+    // You can also fetch the image from the URL
+    const imageResponse = await fetch(imageUrl);
+    const imageBuffer = await imageResponse.buffer();
+
+    // Return the image buffer as a response
+    res.setHeader('Content-Type', imageResponse.headers.get('content-type'));
+    res.status(200).json({ photo: imageBuffer.toString('base64') });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: "Error connection to AI" });
+    res.status(500).json({ message: "Error connecting to AI" });
   }
 });
 
