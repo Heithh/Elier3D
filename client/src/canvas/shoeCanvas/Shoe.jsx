@@ -18,7 +18,8 @@ const Shoe = () => {
   const stateString = JSON.stringify(snap);
 
   return (
-    <group rotation={[Math.PI/2, Math.PI,  -Math.PI/2]}>
+    <group rotation={[Math.PI/2, Math.PI,  -Math.PI/2]}
+    key={stateString}>
       {Object.keys(nodes).map((nodeName) => {
         const node = nodes[nodeName];
         if (node && node.isMesh) {
@@ -34,7 +35,7 @@ const Shoe = () => {
                 <Decal
                   position={[0, 0, 0]}
                   rotation={[0, 0, 0]}
-                  scale={1}
+                  scale={10}
                   map={fullTexture}
                 />
               )}
@@ -43,7 +44,6 @@ const Shoe = () => {
                 <Decal
                   position={[0, 0.04, 0.15]}
                   rotation={[0, 0, 0]}
-                  scale={0.15}
                   map={logoTexture}
                   depthTest={false}
                   depthWrite={true}
