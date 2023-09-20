@@ -13,6 +13,7 @@ const state = proxy ({
   shirtQuantity: 0,
   shoeQuantity: 0,
   checkout: [],
+  loading: false,
 });
 
 export default state;

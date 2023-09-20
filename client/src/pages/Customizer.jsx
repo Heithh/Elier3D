@@ -81,7 +81,7 @@ function Customizer() {
         break;
     }
 
-    // after setting the state, activeFilterTab is updated
+
 
     setActiveFilterTab((prevState) => {
       return {
@@ -112,7 +112,6 @@ function Customizer() {
 
     try {
       setGeneratingImg(true);
-
       const response = await fetch('http://localhost:8080/api/elier', {
         method: 'POST',
         headers: {
@@ -124,7 +123,6 @@ function Customizer() {
       })
 
       const data = await response.json();
-      //console.log('Image URL:', data.photo)
       handleDecals(type, `data:image/png;base64,${data.photo}`)
 
     } catch (error) {
@@ -136,6 +134,9 @@ function Customizer() {
   };
 
   const handleCheckout = () => {
+    if(state.checkout.length === 0) {
+      alert("Add an item before checkout")
+    }
     axios
       .post("http://localhost:8080/create-checkout-session", {items: state.checkout} )
       .then((response) => {
