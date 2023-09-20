@@ -11,8 +11,8 @@ app.use(cors());
 app.use(express.json({ limit: '50mb' }));
 
 const storeItems = new Map([
-  [1, { priceInCents: 11900, name: 'tshirt' }],
-  [2, { priceInCents: 25500, name: 'sneaker' }],
+  [1, { priceInCents: 5500, name: 'tshirt' }],
+  [2, { priceInCents: 15500, name: 'sneaker' }],
 ]);
 
 app.use('/api/elier', elierRoutes);
