@@ -12,7 +12,7 @@ import {
 
 const Home = () => {
   const snap = useSnapshot(state);
-
+//edits
   return (
     <AnimatePresence>
       {snap.intro && (
