@@ -5,6 +5,11 @@
 
 ![Project Banner](./demo/demo.png)
 
+## 📸  Demo
+![demo1](./demo/demo1Gif.gif)
+![demo2](./demo/demo2Gif.gif)
+
+
 ## 🌟 Features
 
 - **ThreeJS**: Harnessing the capabilities of ThreeJS for efficient rendering and animation of 3D models.
